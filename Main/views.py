@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from .forms import registrationform
+from .forms import registrationform,cprofile
 from django.views import View
 from django.contrib import messages
+from .models import customers 
+from django.http import HttpResponseRedirect
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -34,9 +36,41 @@ class registrationView(View):
  def get(self,request):
    form=registrationform()
    return render(request,'registration.html',{'form':form})
+ def post(self,request):
+     form=registrationform(request.POST)
+     if form.is_valid():
+      form.save()
+      messages.success(request,'Succesfully Registration Done')
+     return render(request,'registration.html',{'form':form})
 
-def profile(request):
-    return render(request,'profile.html')
+class cprofileView(View):
+ def get(self,request):
+  form=cprofile()
+  return render(request,'profile.html',{'form':form})
+ 
+ def post(self,request):
+    form=cprofile(request.POST)
+    if form.is_valid():
+       user=request.user
+       f_name=form.cleaned_data['first_name']
+       l_name=form.cleaned_data['last_name']
+       em=form.cleaned_data['email']
+       con=form.cleaned_data['Contract_Number']
+       div=form.cleaned_data['division']
+       dis=form.cleaned_data['district']
+       thana=form.cleaned_data['thana']
+       un=form.cleaned_data['Union']
+
+       pro=customers(user=user,first_name=f_name,last_name=l_name,Contract_Number=con,email=em,division=div,district=dis, thana=thana,Union=un)
+
+       pro.save()
+       return HttpResponseRedirect('/address/')
+    return render(request,'profile.html',{'form':form})
+    
 
 def address(request):
-    return render(request,'address.html')
+    add=customers.objects.filter(user=request.user)
+    return render(request,'address.html',{'add':add})
+
+def users(request):
+   return render(request,'users.html')

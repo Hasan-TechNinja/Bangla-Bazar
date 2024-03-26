@@ -2,12 +2,14 @@
 {% load static %}
 {% block title %}Profile{% endblock title %}
 {% block content %}
-<br> <br> <br> <br> <br>
-<div class="container my-5">
-    <div class="row">
+<link rel="stylesheet" href="{% static "css/st.css" %}">
+<br> <br> <br> <br> <br> <br> <br> <br>
+
+<div class="col-sm-5 offset-sm-1 form-group centered-form-group col-lg-2 mb-3 ">
+    
         <h3>Welcome <span>{{request.user.username|capfirst}}</span></h3>
-        <div class="col-sm-2 border-end">
-            <ul class="list-unstyled">
+        
+            <ul class="list-unstyled text-center">
                 {% if request.user.is_authenticated %}
                 <li class="d-grid"><a href="{% url "profile" %}" class="btn btn-primary">Edit Profile</a></li>
                 <br>
@@ -18,7 +20,7 @@
                 <form action="{% url "logout" %}" method="post">
 
                     {% csrf_token %}
-                    <li> <button type="submit" class="btn btn-primary centered-btn ">Logout</button> </li>
+                    <li> <button type="submit" class="btn btn-primary btn-center centered-btn ">Logout</button> </li>
                 </form>
                 {% else %}
                 <li class="d-grid"><a href="{% url "registration" %}" class="btn btn-primary">Sing-up</a></li>
@@ -26,19 +28,9 @@
                 <li class="d-grid"><a href="{% url "login" %}" class="btn btn-primary">Sing-in</a></li>
                 {% endif %}
             </ul>
-        </div>
-        <div class="ccol-sm-8 offset-sm-1 form-group col-lg-4 mb-2">
-            <form action="" method="post" novalidate>
-                {% csrf_token %} 
-                
-                {% for fm in form %}
-                {{fm.label_tag}} {{fm}} <small class='tex-danger'>{{fm.errors|striptags}}</small>
-                {% endfor %}
-                <div class="col-12 mt-3">
-                    <button type="submit" class="btn btn-primary ">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
+        
+        
+             
+   
 </div>
 {% endblock content %}
