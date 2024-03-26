@@ -9,6 +9,10 @@ urlpatterns = [
     path('cart/',views.cart,name='cart'),
     path('chackout/',views.chackout,name='chackout'),
     path('testimonial',views.testimonial,name='testimonial'),
-    path('404/',views.error,name='404'),
-    path('contract/',views.contract,name='contract')
+    path('error/',views.error,name='error'),
+    path('contract/',views.contract,name='contract'),
+    path('login/',views.login,name='login'),
+    path('registration/',views.registrationView.as_view(),name='registration'),
+    path('profile/',views.profile,name='profile'),
+    path('address/',views.address,name='address')
 ]

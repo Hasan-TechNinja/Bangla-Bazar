@@ -1,5 +1,7 @@
 from django.shortcuts import render
-
+from .forms import registrationform
+from django.views import View
+from django.contrib import messages
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -24,3 +26,17 @@ def error(request):
 
 def contract(request):
     return render(request,'contact.html')
+
+def login(request):
+    return render(request,'login.html')
+
+class registrationView(View):
+ def get(self,request):
+   form=registrationform()
+   return render(request,'registration.html',{'form':form})
+
+def profile(request):
+    return render(request,'profile.html')
+
+def address(request):
+    return render(request,'address.html')
