@@ -1,4 +1,4 @@
-{% block b1 %}{% endblock b1 %}
+{% block b1 %}
 <div class="col-sm-2 border-end">
     <ul class="list-unstyled">
         <li class="d-grid"><a href="{% url "profile" %}" class="btn btn-primary">Create Profile</a></li>
@@ -10,4 +10,4 @@
         <li class="d-grid"><a href="{% url "login" %}" class="btn btn-primary">Sing-in</a></li>
     </ul>
 </div>
-{% block b2 %}{% endblock b2 %}
+{% endblock b1 %}
